@@ -1,6 +1,9 @@
 import {useState} from "react";
 import "./App.css";
 
+const defaultStep = 1;
+const defaultCount = 0;
+
 export default function App() {
 
 
@@ -12,20 +15,25 @@ export default function App() {
 }
 
 function Counter() {
-    const [step, setStep] = useState(1)
-    const [count, setCount] = useState(0)
+    const [step, setStep] = useState(defaultStep)
+    const [count, setCount] = useState(defaultCount)
     const today = new Date()
+
+    function handleReset() {
+        setStep(defaultStep)
+        setCount(defaultCount)
+    }
 
     return (
         <>
             <div>
-                <button onClick={() => setStep(s => s - 1)}>-</button>
-                <span>Step: {step}</span>
-                <button onClick={() => setStep(s => s + 1)}>+</button>
+                <input type="range" min="1" max="10" value={step}
+                       onChange={(e) => setStep(+e.target.value)}/>
+                <span>{step}</span>
             </div>
             <div>
                 <button onClick={() => setCount(c => c - step)}>-</button>
-                <span>Count: {count}</span>
+                <input type="text" value={count} onChange={(e) => setCount(+e.target.value)}/>
                 <button onClick={() => setCount(c => c + step)}>+</button>
             </div>
             <div>
@@ -35,6 +43,7 @@ function Counter() {
                         `${count} days ago was ${new Date(today.setDate(today.getDate() + count)).toLocaleDateString()}` :
                         `In ${count} days will be ${new Date(today.setDate(today.getDate() + count)).toLocaleDateString()}`}</p>
             </div>
+            {count !== defaultCount || step !== defaultStep ? <button onClick={handleReset}>Reset</button> : null}
         </>
     )
 
