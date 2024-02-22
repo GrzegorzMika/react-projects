@@ -8,10 +8,16 @@ import CreateOrder, { action as createOrderAction } from "./features/order/Creat
 import { action as updateOrderAction } from "./features/order/UpdateOrder";
 import Order, { loader as orderLoader } from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: <>
+      <Analytics />
+      <SpeedInsights/>
+      <AppLayout />
+    </>,
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
