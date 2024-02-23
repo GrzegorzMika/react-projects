@@ -33,8 +33,8 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <GlobalStyles />
-        <SpeedInsights />
         <Analytics />
+        <SpeedInsights />
         <BrowserRouter>
           <Routes>
             <Route
